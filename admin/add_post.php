@@ -1,5 +1,9 @@
 <?php
 require 'includes/functions.php';
+require 'includes/controller/post_controller.php';
+
+$cat_sql = $conn->query("SELECT * FROM categories");
+
 ?>
 
 <!doctype html>
@@ -69,39 +73,44 @@ require 'includes/functions.php';
 
         <div class="card shadow p-4 my-4">
           <h5>New blog post</h5>
-          <form action="">
+          <form action="add_post.php" method="POST">
 
             <div class="form-group my-3">
               <label for="post_title">Post Title</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" name="post_title" value="">
             </div>
 
             <div class="form-group my-3">
               <label for="post_author">Post Author</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" name="post_auth" value="">
             </div>
 
             <div class="form-group">
               <label for="post_cat">Select Post Category</label>
-              <select class="form-control">
+              <select class="form-control" name="post_cat">
                 <option value="" selected></option>
-                <option value="">Technology</option>
-                <option value="">Sports</option>
-                <option value="">Entertainment</option>
+                <?php
+                while ($cat = $cat_sql->fetch_assoc()) {
+                ?>
+                  <option value="<?= $cat['id'] ?>"><?= $cat['cat_name'] ?></option>
+
+                <?php
+                }
+                ?>
               </select>
             </div>
 
             <div class="form-gorup my-3">
               <label for=post_body>Post Body</label>
-              <textarea cols="30" rows="10" class="form-control"></textarea>
+              <textarea cols="30" rows="10" class="form-control" name="post_body"></textarea>
             </div>
 
             <div class="form-group my-3">
               <label for="post_image">Post Image</label>
-              <input type="file" class="form-control">
+              <input type="file" class="form-control" name="post_image">
             </div>
 
-            <button type="submit" class="btn btn-sm btn-dark">Pusblish Post</button>
+            <button type="submit" name="submit_post" class="btn btn-sm btn-dark">Pusblish Post</button>
 
           </form>
         </div>
@@ -114,7 +123,7 @@ require 'includes/functions.php';
   <script src="./js/bootstrap.bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" crossorigin="anonymous"></script>
   <script src="./js/dashboard.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

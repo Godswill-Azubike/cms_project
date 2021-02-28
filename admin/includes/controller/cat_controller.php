@@ -11,7 +11,9 @@ if (isset($_POST['cat_publish'])) {
 
     // validate the data
     if (empty($cat_name)) {
+        // ...
     } elseif (empty($cat_details)) {
+        // ...
     } else {
         // inserte data to db
         $conn->query("INSERT INTO categories(cat_name, cat_details) VALUES ('{$cat_name}', '{$cat_details}')");
