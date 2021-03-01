@@ -73,7 +73,7 @@ $cat_sql = $conn->query("SELECT * FROM categories");
 
         <div class="card shadow p-4 my-4">
           <h5>New blog post</h5>
-          <form action="add_post.php" method="POST">
+          <form action="add_post.php" method="POST" enctype="multipart/form-data">
 
             <div class="form-group my-3">
               <label for="post_title">Post Title</label>
