@@ -21,3 +21,10 @@ if (isset($_POST['cat_publish'])) {
         header('Location: add_category.php');
     }
 }
+
+
+
+// fetching the categories form database 
+
+$sql_cat = "SELECT * FROM categories";
+$cat_result = $conn->query($sql_cat);
